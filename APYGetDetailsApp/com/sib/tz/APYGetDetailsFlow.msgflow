@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmCompute.msgnode="ComIbmCompute.msgnode" xmlns:ComIbmWSInput.msgnode="ComIbmWSInput.msgnode" xmlns:ComIbmWSReply.msgnode="ComIbmWSReply.msgnode" xmlns:common_CommonErrorHandler.subflow="common/CommonErrorHandler.subflow" xmlns:common_HTTPTimeOutHandler.subflow="common/HTTPTimeOutHandler.subflow" xmlns:common_InvokeRESTService.subflow="common/InvokeRESTService.subflow" xmlns:common_ReadConfigFile.subflow="common/ReadConfigFile.subflow"
+    xmlns:common_commonLog.subflow="common/commonLog.subflow" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" nsURI="com/sib/tz/APYGetDetailsFlow.msgflow" nsPrefix="com_sib_tz_APYGetDetailsFlow.msgflow">
+  <eClassifiers xmi:type="eflow:FCMComposite" name="FCMComposite_1">
+    <eSuperTypes href="http://www.ibm.com/wbi/2005/eflow#//FCMBlock"/>
+    <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="Property.configFilePath" name="configFilePath" lowerBound="1" defaultValueLiteral="/home/migration/MIGRATION_TEST/Test1">
+      <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="Property.auditQ" name="auditQ" lowerBound="1" defaultValueLiteral="ESB.AUDIT.QUEUE">
+      <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="Property.errorQ" name="errorQ" lowerBound="1" defaultValueLiteral="ESB.ERROR.QUEUE">
+      <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="Property.failureQ" name="failureQ" lowerBound="1" defaultValueLiteral="ESB.FAILURE.QUEUE">
+      <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <translation xmi:type="utility:TranslatableString" key="APYGetDetailsFlow" bundleName="com/sib/tz/APYGetDetailsFlow" pluginId="APYGetDetailsApp"/>
+    <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/APYGetDetailsApp/icons/full/obj16/APYGetDetailsFlow.gif"/>
+    <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/APYGetDetailsApp/icons/full/obj30/APYGetDetailsFlow.gif"/>
+    <composition>
+      <nodes xmi:type="ComIbmWSInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="221,177" URLSpecifier="/esb" messageDomainProperty="BLOB">
+        <translation xmi:type="utility:ConstantString" string="HTTP Input"/>
+      </nodes>
+      <nodes xmi:type="ComIbmWSReply.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="702,139">
+        <translation xmi:type="utility:ConstantString" string="HTTP Reply"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="338,177" computeExpression="esql://routine/com.sib.tz#APYGetDetailsFlow_ProcessRequest.Main" computeMode="all">
+        <translation xmi:type="utility:ConstantString" string="ProcessRequest"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="591,182" computeExpression="esql://routine/com.sib.tz#APYGetDetailsFlow_ProcessResponse.Main" computeMode="all">
+        <translation xmi:type="utility:ConstantString" string="ProcessResponse"/>
+      </nodes>
+      <nodes xmi:type="common_InvokeRESTService.subflow:FCMComposite_1" xmi:id="FCMComposite_1_5" location="456,182">
+        <translation xmi:type="utility:ConstantString" string="InvokeRESTService"/>
+      </nodes>
+      <nodes xmi:type="common_ReadConfigFile.subflow:FCMComposite_1" xmi:id="FCMComposite_1_6" location="414,284">
+        <translation xmi:type="utility:ConstantString" string="ReadConfigFile"/>
+      </nodes>
+      <nodes xmi:type="common_HTTPTimeOutHandler.subflow:FCMComposite_1" xmi:id="FCMComposite_1_7" location="273,296">
+        <translation xmi:type="utility:ConstantString" string="HTTPTimeOutHandler"/>
+      </nodes>
+      <nodes xmi:type="common_CommonErrorHandler.subflow:FCMComposite_1" xmi:id="FCMComposite_1_8" location="609,284">
+        <translation xmi:type="utility:ConstantString" string="CommonErrorHandler"/>
+      </nodes>
+      <nodes xmi:type="common_commonLog.subflow:FCMComposite_1" xmi:id="FCMComposite_1_9" location="522,280">
+        <translation xmi:type="utility:ConstantString" string="commonLog"/>
+      </nodes>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_2" targetNode="FCMComposite_1_8" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.catch" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_3" targetNode="FCMComposite_1_7" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.timeout" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_5" targetNode="FCMComposite_1_5" sourceNode="FCMComposite_1_3" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_6" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_3" sourceTerminalName="OutTerminal.out3" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_9" targetNode="FCMComposite_1_4" sourceNode="FCMComposite_1_5" sourceTerminalName="OutTerminal.Output" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_10" targetNode="FCMComposite_1_8" sourceNode="FCMComposite_1_5" sourceTerminalName="OutTerminal.Output1" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_11" targetNode="FCMComposite_1_8" sourceNode="FCMComposite_1_5" sourceTerminalName="OutTerminal.Output2" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_12" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_4" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_13" targetNode="FCMComposite_1_9" sourceNode="FCMComposite_1_4" sourceTerminalName="OutTerminal.out1" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_14" targetNode="FCMComposite_1_9" sourceNode="FCMComposite_1_3" sourceTerminalName="OutTerminal.out1" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_15" targetNode="FCMComposite_1_6" sourceNode="FCMComposite_1_3" sourceTerminalName="OutTerminal.out2" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_3" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+    </composition>
+    <propertyOrganizer>
+      <propertyDescriptor groupName="Group.Basic" configurable="true" userDefined="true" describedAttribute="Property.configFilePath">
+        <propertyName xmi:type="utility:TranslatableString" key="Property.configFilePath" bundleName="com/sib/tz/APYGetDetailsFlow" pluginId="APYGetDetailsApp"/>
+        <propertyDescriptor groupName="Group.Basic" configurable="true" userDefined="true" describedAttribute="Property.auditQ">
+          <propertyName xmi:type="utility:TranslatableString" key="Property.auditQ" bundleName="com/sib/tz/APYGetDetailsFlow" pluginId="APYGetDetailsApp"/>
+          <propertyDescriptor groupName="Group.Basic" configurable="true" userDefined="true" describedAttribute="Property.errorQ">
+            <propertyName xmi:type="utility:TranslatableString" key="Property.errorQ" bundleName="com/sib/tz/APYGetDetailsFlow" pluginId="APYGetDetailsApp"/>
+            <propertyDescriptor groupName="Group.Basic" configurable="true" userDefined="true" describedAttribute="Property.failureQ">
+              <propertyName xmi:type="utility:TranslatableString" key="Property.failureQ" bundleName="com/sib/tz/APYGetDetailsFlow" pluginId="APYGetDetailsApp"/>
+            </propertyDescriptor>
+          </propertyDescriptor>
+        </propertyDescriptor>
+      </propertyDescriptor>
+    </propertyOrganizer>
+    <stickyBoard/>
+  </eClassifiers>
+</ecore:EPackage>
